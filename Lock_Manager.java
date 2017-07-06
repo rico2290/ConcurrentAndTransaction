@@ -114,23 +114,24 @@ public class Lock_Manager {
 
 	public void Wait_Die(int id_transacao, Item item, String tipo){ 
 		
-		Map<Integer,String> lista_tr_ts = item.transaction_TS;
+		Map<Integer,String> lista_tr_ts = new HashMap<Integer,String>();
+		lista_tr_ts.putAll(item.transaction_TS);
 		
 		boolean vazio = lista_tr_ts.isEmpty();
 		String timeStamp = null;
 		
-		// diferente de vazio pq tem elemento e percorre
+		// diferente de vazio pq tem elemento. percorre!
 		if (!(vazio)) {
-			for (Integer entrada : item.transaction_TS.keySet()){ // chave do valor da tabela transaction_TS
+			for (Integer entrada : lista_tr_ts.keySet()){ // chave do valor da tabela transaction_TS
 				if(entrada == id_transacao){// compara afim de pegar o TS
-					timeStamp = item.transaction_TS.get(entrada);
+					timeStamp = lista_tr_ts.get(entrada);
 				}				
 			}
 
 			if (timeStamp != null){ // Analisar para nao comparar lixo
-				for (Integer entrada : item.transaction_TS.keySet()){ 
+				for (Integer entrada : lista_tr_ts.keySet()){ 
 					if(entrada != id_transacao){ // analiisar N-1 elementos da lista transaction_TS
-						if (timeStamp.compareTo(item.transaction_TS.get(entrada)) < 0){ //esq < dir retorna -1
+						if (timeStamp.compareTo(lista_tr_ts.get(entrada)) < 0){ //esq < dir retorna -1
 							Map<Integer,String> aux = new HashMap<Integer,String>();
 							aux.put(id_transacao,tipo);
 							wait_Q.add(aux);
