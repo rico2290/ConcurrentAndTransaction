@@ -2,10 +2,10 @@
 
 Main.java - Classe Principal da Execução
 
-### ----------- Estudantes ---------- ###
+### ----------- Estudante ---------- ###
 
 RICARDO JOÃO LIMA            --  349059
-MARCOS JOSE MARTINS PEREIRA  --  374195
+
 
 ### How do I get set up? ###
 
